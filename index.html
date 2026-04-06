@@ -1,809 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Capstone.AI — Real AI Projects. Real Businesses. Skills You Can Prove.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --crimson: #9B1C1C;
-    --crimson-dark: #7A1515;
-    --crimson-light: #C0392B;
-    --gold: #D4A843;
-    --gold-light: #F0C060;
-    --off-white: #FAF8F5;
-    --warm-gray: #F2EFE9;
-    --mid-gray: #8A8278;
-    --dark: #1A1714;
-    --charcoal: #2C2926;
-    --text: #3A3530;
-    --border: #E5E0D8;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px;
-    height: 68px;
-    background: rgba(26,23,20,0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(212,168,67,0.15);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--off-white);
-    letter-spacing: -0.02em;
-  }
-  .nav-logo span { color: var(--gold); }
-  .nav-links {
-    display: flex; gap: 36px; list-style: none;
-  }
-  .nav-links a {
-    color: rgba(250,248,245,0.7);
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--dark) !important;
-    padding: 9px 22px;
-    border-radius: 4px;
-    font-weight: 600 !important;
-    font-size: 0.85rem !important;
-    transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    background: var(--dark);
-    display: flex; align-items: center;
-    position: relative; overflow: hidden;
-    padding: 120px 48px 80px;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(212,168,67,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212,168,67,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(155,28,28,0.25) 0%, transparent 70%);
-    top: -100px; right: -100px;
-    pointer-events: none;
-  }
-  .hero-content {
-    position: relative; max-width: 820px;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(212,168,67,0.12);
-    border: 1px solid rgba(212,168,67,0.3);
-    color: var(--gold);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    font-weight: 900;
-    line-height: 1.08;
-    color: var(--off-white);
-    letter-spacing: -0.03em;
-    margin-bottom: 28px;
-    animation: fadeUp 0.6s ease 0.1s both;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-  .hero-sub {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: rgba(250,248,245,0.65);
-    max-width: 600px;
-    margin-bottom: 48px;
-    animation: fadeUp 0.6s ease 0.2s both;
-    font-weight: 300;
-  }
-  .hero-three {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(212,168,67,0.15);
-    border: 1px solid rgba(212,168,67,0.15);
-    border-radius: 8px;
-    overflow: hidden;
-    max-width: 640px;
-    margin-bottom: 48px;
-    animation: fadeUp 0.6s ease 0.3s both;
-  }
-  .hero-three-item {
-    background: rgba(26,23,20,0.9);
-    padding: 20px 24px;
-    text-align: center;
-  }
-  .hero-three-item .label {
-    font-size: 0.72rem;
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(250,248,245,0.4);
-    margin-bottom: 6px;
-  }
-  .hero-three-item .value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--gold);
-    font-weight: 700;
-  }
-  .hero-actions {
-    display: flex; gap: 16px; flex-wrap: wrap;
-    animation: fadeUp 0.6s ease 0.4s both;
-  }
-  .btn-primary {
-    background: var(--crimson);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: background 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--crimson-light); transform: translateY(-1px); }
-  .btn-secondary {
-    background: transparent;
-    color: rgba(250,248,245,0.8);
-    padding: 14px 32px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    border: 1px solid rgba(250,248,245,0.2);
-    transition: border-color 0.2s, color 0.2s;
-    display: inline-block;
-  }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── SECTION DEFAULTS ── */
-  section { padding: 96px 48px; }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--crimson);
-    margin-bottom: 16px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--dark);
-    letter-spacing: -0.02em;
-    max-width: 680px;
-    margin-bottom: 20px;
-  }
-  .section-title em { font-style: italic; color: var(--crimson); }
-  .section-body {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--mid-gray);
-    max-width: 620px;
-    font-weight: 300;
-  }
-  .max-w { max-width: 1100px; margin: 0 auto; }
-
-  /* ── PROBLEM ── */
-  .problem {
-    background: var(--warm-gray);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .problem-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-  }
-  .problem-cards {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-  .problem-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .problem-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--crimson);
-  }
-  .problem-card.gold::before { background: var(--gold); }
-  .problem-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 8px;
-  }
-  .problem-card p {
-    font-size: 0.9rem;
-    color: var(--mid-gray);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-  .problem-connector {
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--crimson);
-    font-style: italic;
-  }
-
-  /* ── HOW IT WORKS ── */
-  .how { background: white; }
-  .steps {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 40px; margin-top: 60px;
-    position: relative;
-  }
-  .steps::before {
-    content: '';
-    position: absolute;
-    top: 28px; left: 16.66%; right: 16.66%;
-    height: 1px;
-    background: linear-gradient(90deg, var(--border), var(--gold), var(--border));
-  }
-  .step {
-    text-align: center;
-    padding: 0 16px;
-  }
-  .step-num {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: var(--dark);
-    color: var(--gold);
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    border: 2px solid var(--gold);
-    position: relative; z-index: 1;
-  }
-  .step h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 12px;
-  }
-  .step p {
-    font-size: 0.9rem;
-    color: var(--mid-gray);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-  .phases {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 20px; margin-top: 56px;
-  }
-  .phase {
-    background: var(--warm-gray);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-  }
-  .phase-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--crimson);
-    margin-bottom: 10px;
-  }
-  .phase h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 8px;
-  }
-  .phase p {
-    font-size: 0.83rem;
-    color: var(--mid-gray);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  /* ── AUDIENCE TABS ── */
-  .audience { background: var(--dark); color: var(--off-white); }
-  .audience .section-title { color: var(--off-white); }
-  .audience .section-body { color: rgba(250,248,245,0.6); }
-  .tabs {
-    display: flex; gap: 0;
-    border-bottom: 1px solid rgba(250,248,245,0.1);
-    margin-top: 48px; margin-bottom: 48px;
-  }
-  .tab-btn {
-    padding: 14px 32px;
-    background: none;
-    border: none;
-    color: rgba(250,248,245,0.45);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-  .tab-btn.active {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-  }
-  .tab-content { display: none; }
-  .tab-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-  .tab-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--off-white);
-    line-height: 1.2;
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-  }
-  .tab-headline em { color: var(--gold); font-style: italic; }
-  .tab-body {
-    font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(250,248,245,0.6);
-    font-weight: 300;
-    margin-bottom: 28px;
-  }
-  .value-list {
-    list-style: none;
-    display: flex; flex-direction: column; gap: 14px;
-  }
-  .value-list li {
-    display: flex; gap: 12px; align-items: flex-start;
-    font-size: 0.92rem;
-    color: rgba(250,248,245,0.75);
-    line-height: 1.5;
-  }
-  .value-list li::before {
-    content: '→';
-    color: var(--gold);
-    font-size: 0.85rem;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-  .tab-stat-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .tab-stat {
-    background: rgba(250,248,245,0.04);
-    border: 1px solid rgba(250,248,245,0.08);
-    border-radius: 8px;
-    padding: 24px;
-  }
-  .tab-stat .num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .tab-stat .desc {
-    font-size: 0.82rem;
-    color: rgba(250,248,245,0.45);
-    line-height: 1.4;
-    font-weight: 300;
-  }
-
-  /* ── PROJECTS ── */
-  .projects { background: var(--warm-gray); }
-  .project-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 24px; margin-top: 56px;
-  }
-  .project-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 28px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  }
-  .project-icon {
-    width: 40px; height: 40px;
-    background: var(--warm-gray);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 18px;
-    font-size: 1.2rem;
-  }
-  .project-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 10px;
-  }
-  .project-card p {
-    font-size: 0.875rem;
-    color: var(--mid-gray);
-    line-height: 1.6;
-    margin-bottom: 16px;
-    font-weight: 300;
-  }
-  .project-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--crimson);
-    background: rgba(155,28,28,0.06);
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-  .project-outcome {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
-    font-size: 0.8rem;
-    color: var(--mid-gray);
-  }
-  .project-outcome strong { color: var(--dark); }
-
-  /* ── CREDENTIAL ── */
-  .credential { background: white; }
-  .credential-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center; margin-top: 56px;
-  }
-  .credential-tiers {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-  .tier-card {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px 24px;
-    display: flex; align-items: center; gap: 20px;
-  }
-  .tier-card.distinguished { border-color: var(--gold); }
-  .tier-badge {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-  .tier-badge.v { background: rgba(155,28,28,0.08); }
-  .tier-badge.d { background: rgba(212,168,67,0.12); }
-  .tier-badge.a { background: rgba(26,23,20,0.06); }
-  .tier-card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 4px;
-  }
-  .tier-card p {
-    font-size: 0.82rem;
-    color: var(--mid-gray);
-    line-height: 1.5;
-    font-weight: 300;
-  }
-  .portfolio-checklist {
-    background: var(--warm-gray);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 32px;
-  }
-  .portfolio-checklist h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 6px;
-  }
-  .portfolio-checklist .sub {
-    font-size: 0.85rem;
-    color: var(--mid-gray);
-    margin-bottom: 24px;
-    font-weight: 300;
-  }
-  .check-item {
-    display: flex; gap: 12px; align-items: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.875rem;
-    color: var(--text);
-  }
-  .check-item:last-child { border-bottom: none; }
-  .check-icon { color: var(--crimson); flex-shrink: 0; margin-top: 1px; font-size: 0.9rem; }
-
-  /* ── MARKET ── */
-  .market { background: var(--dark); }
-  .market .section-title { color: var(--off-white); }
-  .market .section-body { color: rgba(250,248,245,0.55); }
-  .market-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 20px; margin-top: 56px;
-  }
-  .market-stat {
-    background: rgba(250,248,245,0.04);
-    border: 1px solid rgba(250,248,245,0.07);
-    border-radius: 8px;
-    padding: 28px 24px;
-    text-align: center;
-  }
-  .market-stat .big {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 900;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .market-stat .label {
-    font-size: 0.82rem;
-    color: rgba(250,248,245,0.45);
-    line-height: 1.45;
-    font-weight: 300;
-  }
-  .funnel {
-    margin-top: 56px;
-    background: rgba(250,248,245,0.03);
-    border: 1px solid rgba(250,248,245,0.07);
-    border-radius: 10px;
-    padding: 36px;
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 0;
-  }
-  .funnel-step {
-    text-align: center;
-    padding: 0 12px;
-    position: relative;
-  }
-  .funnel-step:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -8px; top: 50%;
-    transform: translateY(-50%);
-    color: rgba(250,248,245,0.2);
-    font-size: 1rem;
-  }
-  .funnel-step .fn {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-  .funnel-step .fl {
-    font-size: 0.75rem;
-    color: rgba(250,248,245,0.4);
-    line-height: 1.4;
-    font-weight: 300;
-  }
-
-  /* ── ADVISORS ── */
-  .advisors { background: var(--warm-gray); }
-  .advisor-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 24px; margin-top: 56px;
-  }
-  .advisor-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 28px;
-  }
-  .advisor-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 6px;
-  }
-  .advisor-card .role {
-    font-size: 0.78rem;
-    font-family: 'DM Mono', monospace;
-    color: var(--crimson);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 12px;
-  }
-  .advisor-card p {
-    font-size: 0.85rem;
-    color: var(--mid-gray);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  /* ── ANALOGY ── */
-  .analogy {
-    background: var(--crimson-dark);
-    color: white;
-    text-align: center;
-    padding: 80px 48px;
-  }
-  .analogy blockquote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.55;
-    max-width: 820px;
-    margin: 0 auto 24px;
-    color: rgba(255,255,255,0.92);
-  }
-  .analogy cite {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.5);
-    font-style: normal;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--dark);
-    padding: 48px;
-    display: flex;
-    align-items: center; justify-content: space-between;
-    border-top: 1px solid rgba(250,248,245,0.06);
-  }
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--off-white);
-  }
-  .footer-logo span { color: var(--gold); }
-  .footer-links {
-    display: flex; gap: 28px; list-style: none;
-  }
-  .footer-links a {
-    color: rgba(250,248,245,0.35);
-    text-decoration: none;
-    font-size: 0.82rem;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-copy {
-    font-size: 0.78rem;
-    color: rgba(250,248,245,0.25);
-  }
-
-  /* ── SCROLL REVEAL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    section { padding: 64px 24px; }
-    .hero { padding: 100px 24px 64px; }
-    .problem-grid, .credential-grid, .tab-content.active { grid-template-columns: 1fr; gap: 40px; }
-    .steps, .project-grid, .market-stats, .advisor-grid { grid-template-columns: 1fr; }
-    .phases { grid-template-columns: 1fr 1fr; }
-    .funnel { grid-template-columns: 1fr; gap: 16px; }
-    .funnel-step:not(:last-child)::after { display: none; }
-    .hero-three { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 24px; text-align: center; }
-  }
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Capstone<span>.AI</span></div>
-  <ul class="nav-links">
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#credential">Credential</a></li>
-    <li><a href="#market">Market</a></li>
-    <li><a href="#contact" class="nav-cta">Get Involved</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-badge">San Mateo County Pilot · 2026</div>
-    <h1>Companies Need AI.<br>Students Need Experience.<br><em>We Connect Them.</em></h1>
-    <p class="hero-sub">
-      Capstone.AI connects businesses that need AI help with people who need real AI experience — and turns 90-day projects into credentials both sides can use.
-    </p>
-    <div class="hero-three">
-      <div class="hero-three-item">
-        <div class="label">Duration</div>
-        <div class="value">90 Days</div>
-      </div>
-      <div class="hero-three-item">
-        <div class="label">Model</div>
-        <div class="value">Real Clients</div>
-      </div>
-      <div class="hero-three-item">
-        <div class="label">Output</div>
-        <div class="value">Verified Proof</div>
-      </div>
+<section id="projects" class="projects">
+  <div class="max-w">
+    <div class="reveal">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Three services. <em>Real outcomes.</em></h2>
+      <p class="section-body">Each service is built around a defined scope, a standard toolset, and a measurable outcome benchmark. You see exactly what you're getting before you sign up.</p>
     </div>
-    <div class="hero-actions">
-      <a href="#how" class="btn-primary">See How It Works</a>
-      <a href="#contact" class="btn-secondary">Join the Pilot →</a>
+
+    <div class="reveal" style="margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 32px;">
+
+      <div class="problem-card" style="padding: 40px;">
+        <div class="section-label" style="margin-bottom: 16px;">Service 01</div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Customer Acquisition &amp; Marketing</h3>
+        <p style="margin-bottom: 24px;">You need more customers but don't have time to write, post, and follow up consistently. We build an AI-assisted content and outreach system — built for your voice, your audience, and your goals — that keeps running after we're done.</p>
+        <div style="border-top: 1px solid var(--border); padding-top: 24px;">
+          <div class="section-label" style="margin-bottom: 12px;">How it works</div>
+          <ol style="padding-left: 20px; line-height: 2;">
+            <li>We learn your business, your customers, and what's worked before</li>
+            <li>We build and deploy a content and outreach system using standard AI tools</li>
+            <li>We hand off everything — templates, prompts, workflows — so you can run it yourself</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="problem-card" style="padding: 40px;">
+        <div class="section-label" style="margin-bottom: 16px;">Service 02</div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Content &amp; Communications at Scale</h3>
+        <p style="margin-bottom: 24px;">You have things to say but can't produce content fast enough — for your website, email list, social, or proposals. We build a consistent content operation around your voice — not generic AI output.</p>
+        <div style="border-top: 1px solid var(--border); padding-top: 24px;">
+          <div class="section-label" style="margin-bottom: 12px;">How it works</div>
+          <ol style="padding-left: 20px; line-height: 2;">
+            <li>We extract your voice, tone, and what makes your business distinct</li>
+            <li>We build a content system — templates, formats, and an AI workflow tailored to your channels</li>
+            <li>We deliver a complete handoff kit so content production doesn't stop when we do</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="problem-card" style="padding: 40px;">
+        <div class="section-label" style="margin-bottom: 16px;">Service 03</div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Data Analysis &amp; Business Intelligence</h3>
+        <p style="margin-bottom: 24px;">You have customer, sales, or operational data — but no clear picture of what it's telling you. We build a dashboard or analysis that answers the questions you actually have: who your best customers are, where you're losing money, what's working.</p>
+        <div style="border-top: 1px solid var(--border); padding-top: 24px;">
+          <div class="section-label" style="margin-bottom: 12px;">How it works</div>
+          <ol style="padding-left: 20px; line-height: 2;">
+            <li>We identify the 2–3 questions your data should be answering but isn't</li>
+            <li>We build a clean analysis using standard tools (Google Looker Studio, Sheets, or equivalent)</li>
+            <li>We document how to read it and update it — so it stays useful after delivery</li>
+          </ol>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -816,7 +62,7 @@
         <div class="section-label">The Problem</div>
         <h2 class="section-title">Two unsolved problems. <em>One program.</em></h2>
         <p class="section-body">
-          58% of small businesses are trying to adopt AI. They can't afford the talent to do it.
+          96% of small businesses plan to adopt AI — but most can't afford the talent to implement it.
           Meanwhile, recent graduates have nowhere to build real, verifiable AI experience.
           The tools are new enough that no one has a real track record — and every resume claims the same thing.
           Capstone.AI exists because both gaps are real, and they solve each other.
@@ -848,42 +94,23 @@
     <div class="steps reveal">
       <div class="step">
         <div class="step-num">1</div>
-        <h3>Client Qualification</h3>
-        <p>Businesses apply with a specific, measurable problem. We filter for 2+ years operating, accessible data, and a goal that AI can genuinely move — not just assist with.</p>
+        <h3>Choose a Service</h3>
+        <p>We offer three AI services, each with a defined scope, a standard toolset, a 90-day timeline, and a documented outcome benchmark. Browse what we offer, select the service that fits your business, and submit your details. We reach out within a week to confirm fit and schedule kickoff.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <h3>Team Matching</h3>
-        <p>A trained team of 2–4 is matched to the client based on problem type and domain. The team designs the project scope, defines the baseline metric, and co-signs the deliverable standard.</p>
+        <h3>Team Assignment</h3>
+        <p>A team of 2–4 associates is assigned to your engagement. They're briefed on your business context and apply the service to your specific situation — same proven process, your data, your customers, your baseline.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <h3>Verified Outcomes</h3>
-        <p>At close, an independent expert panel reviews the work. Outcomes are documented against the baseline. Both client and learner walk away with something verifiable — not just a certificate.</p>
+        <p>At close, an independent expert panel reviews the work. Outcomes are documented against the baseline. Both client and team walk away with something verifiable — not just a certificate.</p>
       </div>
     </div>
-    <div class="phases reveal">
-      <div class="phase">
-        <div class="phase-tag">Weeks 1–3</div>
-        <h4>Knowledge Extraction</h4>
-        <p>Structured interviews with the owner. Voice capture. Problem reframing. What's not on the website but should be — pulled out before a single AI tool is used.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-tag">Weeks 4–6</div>
-        <h4>Strategy & Architecture</h4>
-        <p>Content strategy, keyword analysis, and a 90-day production plan. The team must defend their strategic choices live — the first moment AI cannot substitute for judgment.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-tag">Weeks 7–10</div>
-        <h4>Build & Deploy</h4>
-        <p>The actual work ships. A constraint is introduced at Week 6 — a deliberate curveball requiring teams to adapt. Documented in the portfolio as a Human Judgment Moment.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-tag">Weeks 11–12</div>
-        <h4>Measure & Hand Off</h4>
-        <p>Before/after metrics are documented. The AI Leave-Behind Kit — prompt library, voice guide, workflow SOP — is handed to the client. The expert panel evaluates.</p>
-      </div>
-    </div>
+    <p class="section-body" style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); font-style: italic;">
+      Every engagement closes with documented before-and-after results, reviewed by an independent expert panel. Both client and team walk away with something verifiable.
+    </p>
   </div>
 </section>
 
@@ -1234,6 +461,17 @@
   </div>
 </section>
 
+
+<section id="references" style="background: var(--off-white, #FAF8F5);">
+  <div class="max-w" style="padding: 40px 0 24px;">
+    <div style="font-size: 10px; font-family: var(--font-body, 'DM Sans', sans-serif); color: var(--mid-gray, #8A8278); line-height: 1.7; border-top: 1px solid rgba(138,130,120,0.2); padding-top: 24px;">
+      <strong style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-gray, #8A8278);">Data References</strong><br><br>
+      [1] U.S. Chamber of Commerce. <em>Empowering Small Business: The Impact of Technology on U.S. Small Business</em> (2025). 96% of small business owners plan to adopt emerging technologies including AI; 58% currently use generative AI, up from 40% in 2024. <a href="https://www.uschamber.com/technology/empowering-small-business-the-impact-of-technology-on-u-s-small-business" target="_blank" style="color: var(--mid-gray, #8A8278); text-decoration: underline;">uschamber.com</a><br><br>
+      [2] U.S. Census Bureau. <em>Nonemployer Statistics (NES)</em> (2022). 29.8M non-employer businesses nationally; 70,889 in San Mateo County. <a href="https://www.census.gov/programs-surveys/nonemployer-statistics.html" target="_blank" style="color: var(--mid-gray, #8A8278); text-decoration: underline;">census.gov</a><br><br>
+      [3] SBA Office of Advocacy. <em>Research Spotlight: AI in Business — Small Firms Closing In</em> (September 2025). Small business AI usage reached 8.8% in production use; large-small adoption gap narrowed from 1.8× to 1.2× since 2024. <a href="https://advocacy.sba.gov/wp-content/uploads/2025/09/Research-Spotlight-AI-in-Business-Small-Firms-Closing-In_-092425.pdf" target="_blank" style="color: var(--mid-gray, #8A8278); text-decoration: underline;">advocacy.sba.gov</a>
+    </div>
+  </div>
+</section>
 <footer>
   <div class="footer-logo">Capstone<span>.AI</span></div>
   <ul class="footer-links">
