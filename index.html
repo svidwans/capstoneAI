@@ -804,7 +804,7 @@
         <div class="audience-grid">
           <div>
             <div class="audience-title">The entry-level job market is broken. This is a different path.</div>
-            <p class="audience-body">58% of 2024–2025 graduates are still searching for their first job. AI is eliminating the entry-level roles that graduates have always used to get started — and underemployed workers tend to stay underemployed. A Capstone project gives you real client work, expert supervision, and a verified portfolio entry that proves what you can do before an employer has to take a chance on you.</p>
+            <p class="audience-body">58% of 2024–2025 graduates are still searching for their first job. AI is eliminating the entry-level roles that graduates have always used to get started. A Capstone project gives you real client work, expert supervision, and a verified portfolio entry that proves what you can do before an employer has to take a chance on you.</p>
             <ul class="audience-features">
               <li>Live client engagement with real stakes</li>
               <li>Expert panel evaluation and score published</li>
@@ -867,6 +867,18 @@
 
         <div class="service-card">
           <div class="section-label">Service 02</div>
+          <h3>Data Analysis &amp; Business Intelligence</h3>
+          <p>73% of small businesses aren't sure their current strategy is working. A two-person team audits what data you already have, identifies the 2–3 questions it should be answering, and builds a clean dashboard you can actually use. An expert validates the analysis before delivery.</p>
+          <div class="service-how">
+            <div class="section-label" style="margin-bottom: 12px;">How it works</div>
+            <ol>
+              <li>We identify the 2–3 questions your data should be answering but isn't</li>
+              <li>We build a clean analysis using standard tools (Google Looker Studio, Sheets, or equivalent)</li>
+              <li>We document how to read it and update it — so it stays useful after delivery</li>
+            </ol>
+          </div>
+        </div><div class="service-card">
+          <div class="section-label">Service 03</div>
           <h3>Content &amp; Communications at Scale</h3>
           <p>65% of small businesses don't have the time or budget to produce content consistently. A two-person team extracts your voice, builds a content system around it, and hands off templates, prompts, and workflows so you can produce without starting from scratch every time. An expert reviews for quality before handoff.</p>
           <div class="service-how">
@@ -879,19 +891,7 @@
           </div>
         </div>
 
-        <div class="service-card">
-          <div class="section-label">Service 03</div>
-          <h3>Data Analysis &amp; Business Intelligence</h3>
-          <p>73% of small businesses aren't sure their current strategy is working. A two-person team audits what data you already have, identifies the 2–3 questions it should be answering, and builds a clean dashboard you can actually use. An expert validates the analysis before delivery.</p>
-          <div class="service-how">
-            <div class="section-label" style="margin-bottom: 12px;">How it works</div>
-            <ol>
-              <li>We identify the 2–3 questions your data should be answering but isn't</li>
-              <li>We build a clean analysis using standard tools (Google Looker Studio, Sheets, or equivalent)</li>
-              <li>We document how to read it and update it — so it stays useful after delivery</li>
-            </ol>
-          </div>
-        </div>
+        
 
       </div>
     </div>
@@ -1051,8 +1051,8 @@
         <strong>Data References</strong>
         <div class="ref-item">[1] U.S. Chamber of Commerce. <em>Empowering Small Business: The Impact of Technology on U.S. Small Business</em> (2025). 96% of small business owners plan to adopt emerging technologies including AI; 58% currently use generative AI, up from 40% in 2024. <a href="https://www.uschamber.com/technology/empowering-small-business-the-impact-of-technology-on-u-s-small-business" target="_blank">uschamber.com</a></div>
         <div class="ref-item">[2] U.S. Census Bureau. <em>Nonemployer Statistics (NES)</em> (2022). 29.8M non-employer businesses nationally; 70,889 in San Mateo County. <a href="https://www.census.gov/programs-surveys/nonemployer-statistics.html" target="_blank">census.gov</a></div>
-        <div class="ref-item">[3] Federal Reserve Bank of New York. <em>The Labor Market for Recent College Graduates</em> (Q4 2025). Unemployment rate for recent graduates hit 5.7%; underemployment rate reached 42.5% — highest since 2020. <a href="https://www.newyorkfed.org/research/college-labor-market" target="_blank">newyorkfed.org</a></div>
-        <div class="ref-item">[4] Federal Reserve Banks. <em>2025 Report on Employer Firms: 2024 Small Business Credit Survey</em>. Reaching customers and growing sales cited as top operational challenge by 57% of small firms, up from 53% in 2023. <a href="https://www.fedsmallbusiness.org/reports/survey/2025/2025-report-on-employer-firms" target="_blank">fedsmallbusiness.org</a></div>
+        <div class="ref-item">[3] Federal Reserve Bank of New York. <em>The Labor Market for Recent College Graduates</em> (Q4 2025). Unemployment rate for recent graduates hit 5.7%; underemployment rate reached 42.5%. <a href="https://www.newyorkfed.org/research/college-labor-market" target="_blank">newyorkfed.org</a></div>
+        <div class="ref-item">[4] Federal Reserve Banks. <em>2025 Report on Employer Firms: 2024 Small Business Credit Survey</em>. Reaching customers cited as top challenge by 57% of firms. <a href="https://www.fedsmallbusiness.org/reports/survey/2025/2025-report-on-employer-firms" target="_blank">fedsmallbusiness.org</a></div>
         <div class="ref-item">[5] SBA Office of Advocacy. <em>Research Spotlight: AI in Business — Small Firms Closing In</em> (September 2025). Small business AI usage reached 8.8% in production use; large-small adoption gap narrowed from 1.8× to 1.2× since 2024. <a href="https://advocacy.sba.gov/wp-content/uploads/2025/09/Research-Spotlight-AI-in-Business-Small-Firms-Closing-In_-092425.pdf" target="_blank">advocacy.sba.gov</a></div>
       </div>
     </div>
@@ -1083,4 +1083,16 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('visible');entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll(':not(.hero) .reveal').forEach(el => observer.observe(el));
+
+    // Make hero visible immediately
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+  </script>
+
+</body>
+</html>
