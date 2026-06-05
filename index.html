@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capstone.AI — Real AI Projects. Real Non-Profits. Skills You Can Prove.</title>
+  <title>Capstone.AI — Real AI Projects. Real Non-Profits. The Skills That Get You Hired.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -91,11 +91,15 @@
     .service-how { border-top: 1px solid var(--border); padding-top: 24px; }
     .service-how ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
     .service-how li { font-size: 0.9rem; color: var(--mid-gray); line-height: 1.6; padding-left: 4px; }
+    .service-outcome { font-size: 0.85rem; color: var(--mid-gray); font-style: italic; line-height: 1.65; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
     .credential { background: var(--dark); }
     .credential .section-title { color: #fff; }
     .credential .section-body { color: rgba(255,255,255,0.5); max-width: 480px; }
     .credential .section-label { color: rgba(255,255,255,0.4); }
-    .credential-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px; }
+    .credential-hjm { background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.2); border-radius: 8px; padding: 28px 32px; margin-top: 40px; margin-bottom: 40px; }
+    .credential-hjm-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .credential-hjm p { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
+    .credential-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .credential-tier { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 32px; }
     .credential-tier-icon { font-size: 1.5rem; margin-bottom: 16px; }
     .credential-tier-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
@@ -104,7 +108,7 @@
     .analogy-quote { font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 400; font-style: italic; color: rgba(255,255,255,0.9); line-height: 1.65; max-width: 820px; margin-bottom: 32px; }
     .analogy-attribution { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
     .market { background: var(--warm-gray); }
-    .market-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; margin-bottom: 64px; }
+    .market-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 56px; margin-bottom: 64px; }
     .market-stat { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 28px 24px; }
     .market-stat-value { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--crimson); line-height: 1; margin-bottom: 8px; }
     .market-stat-label { font-size: 0.8rem; color: var(--mid-gray); line-height: 1.5; }
@@ -202,32 +206,32 @@
     </div>
   </section>
 
-<!-- PROBLEM -->
-<section id="problem" class="problem">
-  <div class="max-w">
-    <div class="reveal" style="margin-bottom: 56px;">
-      <div class="section-label">The Problem</div>
-      <h2 class="section-title">One solution. <em>Three beneficiaries.</em></h2>
-      <p class="section-body">
-        Non-profits need AI capacity they can't afford. Students need real-world experience employers will recognize. And employers need to hire people who've actually worked with AI — not just studied it. These three gaps point at the same solution.
-      </p>
+  <!-- PROBLEM -->
+  <section id="problem" class="problem">
+    <div class="max-w">
+      <div class="reveal" style="margin-bottom: 56px;">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">One solution. <em>Three beneficiaries.</em></h2>
+        <p class="section-body">
+          Non-profits need AI capacity they can't afford. Students need real-world experience employers will recognize. And employers need to hire people who've actually worked with AI — not just studied it. These three gaps point at the same solution.
+        </p>
+      </div>
+      <div class="reveal problem-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div class="problem-card">
+          <h3>For Non-Profits</h3>
+          <p>Mission-driven organizations face the same operational pressures as any business — outreach, communications, data — without the budget for consultants or a full-time AI hire. Most can't access AI capacity at any price that makes sense.</p>
+        </div>
+        <div class="problem-card">
+          <h3>For Talent</h3>
+          <p>Employers aren't struggling to find people who can run an AI tool. They're struggling to find people who can communicate findings to a client, make a judgment call when the model is wrong, and know when to keep a human in the loop. Those skills can't be taught in a classroom — they only come from real work, with real stakes and a real client on the other end.</p>
+        </div>
+        <div class="problem-card">
+          <h3>For Employers</h3>
+          <p>Hiring managers want candidates who've worked with real clients, made real decisions under uncertainty, and understand when AI helps and when a human needs to stay in the loop. That combination is rare — and nearly impossible to verify in a new graduate without auditable evidence.</p>
+        </div>
+      </div>
     </div>
-    <div class="reveal problem-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-      <div class="problem-card">
-        <h3>For Non-Profits</h3>
-        <p>Mission-driven organizations face the same operational pressures as any business — outreach, communications, data — without the budget for consultants or a full-time AI hire. Most can't access AI capacity at any price that makes sense.</p>
-      </div>
-      <div class="problem-card">
-        <h3>For Talent</h3>
-        <p>Bootcamps and courses produce certificates. Employers want proof of real outcomes. AI tools can be taught in a classroom — but human judgment, communication, and the discipline to use AI wisely can only be built through live client work.</p>
-      </div>
-      <div class="problem-card">
-        <h3>For Employers</h3>
-        <p>Hiring managers want candidates who've worked with real clients, made real decisions under uncertainty, and know when AI helps and when it doesn't. That combination is rare — and nearly impossible to verify in a new graduate without auditable evidence.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- SERVICES -->
   <section id="projects" class="projects">
@@ -250,6 +254,7 @@
               <li>We build and deploy a content and outreach system using standard AI tools</li>
               <li>We hand off everything — templates, prompts, workflows — so you can run it yourself</li>
             </ol>
+            <p class="service-outcome">Throughout the engagement, students practice client communication and stakeholder management — not just at delivery, but at every check-in along the way.</p>
           </div>
         </div>
 
@@ -264,6 +269,7 @@
               <li>We build a clean analysis using standard tools (Google Looker Studio, Sheets, or equivalent)</li>
               <li>We document how to read it and update it — so it stays useful after delivery</li>
             </ol>
+            <p class="service-outcome">Translating data findings for a non-technical client is a core part of the project. Students learn to present, defend, and adjust their analysis in real conversations — not just hand off a dashboard.</p>
           </div>
         </div>
 
@@ -278,6 +284,7 @@
               <li>We build a content system — templates, formats, and an AI workflow tailored to your channels</li>
               <li>We deliver a complete handoff kit so content production doesn't stop when we do</li>
             </ol>
+            <p class="service-outcome">Students learn to represent an organization's voice responsibly — including knowing when to override AI-generated copy and when the human judgment call matters most.</p>
           </div>
         </div>
 
@@ -292,6 +299,10 @@
         <div class="section-label">The Credential</div>
         <h2 class="section-title">A portfolio an employer <em>can actually verify.</em></h2>
         <p class="section-body">Not a certificate. An auditable record — baseline metrics, outcome data, AI tool logs, Human Judgment Moment documentation, and expert panel scores. Every claim links to evidence of real work with a real client.</p>
+        <div class="credential-hjm">
+          <div class="credential-hjm-label">What is a Human Judgment Moment?</div>
+          <p>Every Capstone project requires students to document at least three moments where they evaluated AI output, made an independent judgment, and can explain their reasoning. These are logged, reviewed by the expert panel, and included in the verified portfolio — evidence of responsible, human-in-the-loop AI use that no transcript or certificate can provide.</p>
+        </div>
       </div>
       <div class="credential-grid reveal">
         <div class="credential-tier">
@@ -314,12 +325,12 @@
       <div class="reveal">
         <div class="section-label">The Market</div>
         <h2 class="section-title">A real market. <em>Underserved by every existing credential.</em></h2>
-        <p class="section-body">The US has 1.5 million non-profits. The Bay Area is home to thousands of mission-driven organizations that need AI capacity and can't access it. We're starting with the ones that are qualified, AI-ready, and have a problem worth solving.</p>
+        <p class="section-body">The US has 1.5 million public charities. The Bay Area is home to thousands of mission-driven organizations that need AI capacity and can't access it. We're starting with the ones that are qualified, AI-ready, and have a problem worth solving.</p>
       </div>
       <div class="market-stats reveal">
         <div class="market-stat">
           <div class="market-stat-value">1.5M</div>
-          <div class="market-stat-label">Registered non-profits in the United States</div>
+          <div class="market-stat-label">Public charities in the United States (501(c)(3))</div>
         </div>
         <div class="market-stat">
           <div class="market-stat-value">~10K</div>
@@ -333,13 +344,17 @@
           <div class="market-stat-value">3–6K</div>
           <div class="market-stat-label">New AI implementation roles opening annually at US organizations now</div>
         </div>
+        <div class="market-stat">
+          <div class="market-stat-value">~1.45M</div>
+          <div class="market-stat-label">Community college credentials awarded annually — most graduates have no applied AI project on record <span style="font-size:0.7rem;opacity:0.7;">(AACC, 2022–23)</span></div>
+        </div>
       </div>
       <div class="market-funnel reveal">
         <div class="funnel-title">From total market to qualified pilot clients</div>
         <div class="funnel-steps">
           <div class="funnel-step">
             <div class="funnel-step-value">1.5M</div>
-            <div class="funnel-step-label">US non-profits</div>
+            <div class="funnel-step-label">US public charities</div>
           </div>
           <div class="funnel-step">
             <div class="funnel-step-value">~10K</div>
@@ -441,11 +456,12 @@
     <div class="max-w">
       <div class="references-inner">
         <strong>Data References</strong>
-        <div class="ref-item">[1] National Center for Charitable Statistics. Approximately 1.5 million non-profit organizations registered in the United States. <a href="https://nccs.urban.org" target="_blank">nccs.urban.org</a></div>
+        <div class="ref-item">[1] National Center for Charitable Statistics. Approximately 1.5 million 501(c)(3) public charities registered in the United States. <a href="https://nccs.urban.org" target="_blank">nccs.urban.org</a></div>
         <div class="ref-item">[2] U.S. Chamber of Commerce. <em>Empowering Small Business: The Impact of Technology on U.S. Small Business</em> (2025). 96% of small business owners plan to adopt emerging technologies including AI; 58% currently use generative AI, up from 40% in 2024. <a href="https://www.uschamber.com/technology/empowering-small-business-the-impact-of-technology-on-u-s-small-business" target="_blank">uschamber.com</a></div>
         <div class="ref-item">[3] Federal Reserve Bank of New York. <em>The Labor Market for Recent College Graduates</em> (Q4 2025). Unemployment rate for recent graduates hit 5.7%; underemployment rate reached 42.5%. <a href="https://www.newyorkfed.org/research/college-labor-market" target="_blank">newyorkfed.org</a></div>
         <div class="ref-item">[4] Federal Reserve Banks. <em>2025 Report on Employer Firms: 2024 Small Business Credit Survey</em>. Reaching customers cited as top challenge by 57% of firms. <a href="https://www.fedsmallbusiness.org/reports/survey/2025/2025-report-on-employer-firms" target="_blank">fedsmallbusiness.org</a></div>
         <div class="ref-item">[5] SBA Office of Advocacy. <em>Research Spotlight: AI in Business — Small Firms Closing In</em> (September 2025). Small business AI usage reached 8.8% in production use; large-small adoption gap narrowed from 1.8× to 1.2× since 2024. <a href="https://advocacy.sba.gov/wp-content/uploads/2025/09/Research-Spotlight-AI-in-Business-Small-Firms-Closing-In_-092425.pdf" target="_blank">advocacy.sba.gov</a></div>
+        <div class="ref-item">[6] American Association of Community Colleges. Community colleges awarded more than 1.45 million credentials in the 2022–23 academic year, a 21% increase from a decade earlier. <a href="https://www.aacc.nche.edu" target="_blank">aacc.nche.edu</a></div>
       </div>
     </div>
   </section>
