@@ -1,496 +1,957 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Capstone.AI — Real AI Projects. Real Non-Profits. The Skills That Get You Hired.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --crimson: #9B1C1C; --crimson-dark: #7A1515; --crimson-light: #C0392B;
-      --gold: #D4A843; --gold-light: #F0C060;
-      --off-white: #FAF8F5; --warm-gray: #F2EFE9; --mid-gray: #8A8278;
-      --dark: #1A1714; --charcoal: #2C2926; --border: rgba(138,130,120,0.2);
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body: 'DM Sans', system-ui, sans-serif;
-    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1b2d;
+      --navy-mid: #1a2e45;
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --amber: #f59e0b;
+      --amber-light: #fbbf24;
+      --slate: #64748b;
+      --slate-light: #94a3b8;
+      --white: #ffffff;
+      --off-white: #f8fafc;
+      --border: rgba(255,255,255,0.08);
+      --border-dark: #e2e8f0;
+    }
+
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); background: var(--off-white); color: var(--charcoal); line-height: 1.6; overflow-x: hidden; }
-    .max-w { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--dark); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: #fff; text-decoration: none; font-weight: 700; }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
-    .nav-links a:hover { color: #fff; }
-    .nav-cta { background: var(--gold); color: var(--dark) !important; padding: 10px 20px; border-radius: 4px; font-weight: 600 !important; transition: background 0.2s !important; }
-    .nav-cta:hover { background: var(--gold-light) !important; }
-    .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    section { padding: 100px 0; }
-    .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 16px; }
-    .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; color: var(--dark); margin-bottom: 24px; }
-    .section-title em { font-style: italic; color: var(--crimson); }
-    .section-body { font-size: 1.05rem; color: var(--mid-gray); max-width: 560px; line-height: 1.75; }
-    .hero { background: var(--dark); min-height: 100vh; display: flex; align-items: center; padding-top: 64px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(155,28,28,0.18) 0%, transparent 70%); pointer-events: none; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,168,67,0.3); padding: 6px 14px; border-radius: 20px; margin-bottom: 32px; }
-    .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 5.5rem); font-weight: 900; line-height: 1.05; color: #fff; margin-bottom: 28px; }
-    .hero h1 em { display: block; font-style: italic; color: var(--gold); }
-    .hero-sub { font-size: 1.35rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.7; margin-bottom: 40px; }
-    .hero-stats { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; max-width: 480px; margin-bottom: 40px; }
-    .hero-stat { flex: 1; padding: 20px 24px; border-right: 1px solid rgba(255,255,255,0.1); }
-    .hero-stat:last-child { border-right: none; }
-    .hero-stat-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
-    .hero-stat-value { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--gold); }
-    .hero-actions { display: flex; gap: 16px; align-items: center; }
-    .btn-primary { background: var(--gold); color: var(--dark); padding: 14px 28px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background 0.2s, transform 0.2s; display: inline-block; }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn-ghost { color: rgba(255,255,255,0.7); font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-    .btn-ghost:hover { color: #fff; }
-    .problem { background: var(--warm-gray); }
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .problem-cards { display: flex; flex-direction: column; gap: 16px; }
-    .problem-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 28px; }
-    .problem-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
-    .problem-card p { font-size: 0.9rem; color: var(--mid-gray); line-height: 1.7; }
-    .how { background: var(--off-white); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; }
-    .step-num { font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 16px; }
-    .step h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
-    .step p { font-size: 0.9rem; color: var(--mid-gray); line-height: 1.7; }
-    .audience { background: var(--dark); }
-    .audience .section-title { color: #fff; }
-    .audience .section-body { color: rgba(255,255,255,0.5); }
-    .audience .section-label { color: rgba(255,255,255,0.4); }
-    .tabs { display: flex; gap: 0; margin-top: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .tab-btn { background: none; border: none; color: rgba(255,255,255,0.4); font-family: var(--font-body); font-size: 0.875rem; font-weight: 500; padding: 14px 24px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
-    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .tab-content { display: none; padding-top: 40px; }
-    .tab-content.active { display: block; }
-    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    .audience-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2; }
-    .audience-body { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.75; margin-bottom: 24px; }
-    .audience-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .audience-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: rgba(255,255,255,0.6); }
-    .audience-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-    .audience-callout { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 32px; }
-    .callout-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    .callout-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
-    .callout-body { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
-    .projects { background: var(--warm-gray); }
-    .service-cards { display: flex; flex-direction: column; gap: 32px; margin-top: 56px; }
-    .service-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 40px; }
-    .service-card h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
-    .service-card > p { font-size: 0.95rem; color: var(--mid-gray); line-height: 1.75; margin-bottom: 28px; max-width: 680px; }
-    .service-how { border-top: 1px solid var(--border); padding-top: 24px; }
-    .service-how ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
-    .service-how li { font-size: 0.9rem; color: var(--mid-gray); line-height: 1.6; padding-left: 4px; }
-    .service-outcome { font-size: 0.85rem; color: var(--mid-gray); font-style: italic; line-height: 1.65; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .credential { background: var(--dark); }
-    .credential .section-title { color: #fff; }
-    .credential .section-body { color: rgba(255,255,255,0.5); max-width: 480px; }
-    .credential .section-label { color: rgba(255,255,255,0.4); }
-    .credential-hjm { background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.2); border-radius: 8px; padding: 28px 32px; margin-top: 40px; margin-bottom: 40px; }
-    .credential-hjm-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-    .credential-hjm p { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
-    .credential-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .credential-tier { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 32px; }
-    .credential-tier-icon { font-size: 1.5rem; margin-bottom: 16px; }
-    .credential-tier-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
-    .credential-tier p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
-    .analogy { background: var(--crimson-dark); }
-    .analogy-quote { font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 400; font-style: italic; color: rgba(255,255,255,0.9); line-height: 1.65; max-width: 820px; margin-bottom: 32px; }
-    .analogy-attribution { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
-    .market { background: var(--warm-gray); }
-    .market-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 56px; margin-bottom: 64px; }
-    .market-stat { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 28px 24px; }
-    .market-stat-value { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--crimson); line-height: 1; margin-bottom: 8px; }
-    .market-stat-label { font-size: 0.8rem; color: var(--mid-gray); line-height: 1.5; }
-    .market-funnel { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 40px; }
-    .funnel-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 32px; }
-    .funnel-steps { display: flex; gap: 0; align-items: center; }
-    .funnel-step { flex: 1; text-align: center; padding: 20px 12px; border-right: 1px solid var(--border); }
-    .funnel-step:last-child { border-right: none; }
-    .funnel-step-value { font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: var(--dark); margin-bottom: 6px; }
-    .funnel-step-label { font-size: 0.75rem; color: var(--mid-gray); line-height: 1.4; }
-    .advisors { background: var(--off-white); }
-    .advisor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
-    .advisor-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 28px; }
-    .advisor-status { display: inline-block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--crimson); border: 1px solid var(--crimson); padding: 3px 8px; border-radius: 3px; margin-bottom: 14px; }
-    .advisor-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
-    .advisor-card p { font-size: 0.85rem; color: var(--mid-gray); line-height: 1.65; }
-    .contact { background: var(--dark); }
-    .contact .section-title { color: #fff; }
-    .contact .section-body { color: rgba(255,255,255,0.5); max-width: 480px; margin-bottom: 40px; }
-    .contact .section-label { color: rgba(255,255,255,0.4); }
-    .contact-groups { display: flex; flex-direction: column; gap: 36px; }
-    .contact-group-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
-    .contact-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-contact { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); padding: 14px 28px; border-radius: 4px; font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; text-decoration: none; cursor: pointer; transition: background 0.2s, color 0.2s; display: inline-block; }
-    .btn-contact:hover { background: rgba(255,255,255,0.14); color: #fff; }
-    .btn-contact-primary { background: var(--gold); color: var(--dark); border-color: var(--gold); }
-    .btn-contact-primary:hover { background: var(--gold-light); color: var(--dark); }
-    .references { background: var(--off-white); }
-    .references-inner { border-top: 1px solid var(--border); padding-top: 24px; padding-bottom: 24px; font-size: 10px; font-family: var(--font-body); color: var(--mid-gray); line-height: 1.8; }
-    .references-inner strong { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 12px; }
-    .references-inner a { color: var(--mid-gray); text-decoration: underline; }
-    .ref-item { margin-bottom: 10px; }
-    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 40px; display: flex; justify-content: space-between; align-items: center; }
-    .footer-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.5); }
-    .footer-logo span { color: var(--gold); }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-    .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.35); text-decoration: none; }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
-    @media (max-width: 768px) {
-      .max-w { padding: 0 24px; } nav { padding: 0 24px; } .nav-links { display: none; }
-      section { padding: 72px 0; } .problem-grid { grid-template-columns: 1fr; gap: 40px; }
-      .steps { grid-template-columns: 1fr; gap: 32px; } .audience-grid { grid-template-columns: 1fr; }
-      .credential-grid { grid-template-columns: 1fr; } .market-stats { grid-template-columns: 1fr 1fr; }
-      .advisor-grid { grid-template-columns: 1fr; } .funnel-steps { flex-direction: column; }
-      .funnel-step { border-right: none; border-bottom: 1px solid var(--border); }
-      footer { flex-direction: column; gap: 24px; text-align: center; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,27,45,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--teal-light); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em;
+      color: var(--slate-light); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 100px 40px 80px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(13,148,136,0.12); border: 1px solid rgba(13,148,136,0.3);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--teal-light); text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.15;
+      color: var(--white); margin-bottom: 24px;
+    }
+    .hero h1 em { color: var(--teal-light); font-style: italic; }
+    .hero p {
+      font-size: 1.1rem; color: var(--slate-light);
+      max-width: 600px; margin-bottom: 40px; line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; gap: 48px; margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .hero-stat label {
+      display: block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 4px;
+    }
+    .hero-stat span {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem; color: var(--white);
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--teal); color: var(--white);
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--teal-light); }
+    .btn-outline {
+      border: 1px solid var(--border); color: var(--white);
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--teal-light); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 80px 40px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .section-title em { color: var(--teal-light); font-style: italic; }
+    .section-rule {
+      width: 48px; height: 3px;
+      background: var(--teal); border-radius: 2px;
+      margin-bottom: 40px;
+    }
+    .section-intro {
+      font-size: 1.05rem; color: var(--slate-light);
+      max-width: 680px; line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    /* ── DIVIDER ── */
+    .full-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── THREE GAPS ── */
+    .gap-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden;
+    }
+    .gap-card {
+      background: var(--navy-mid);
+      padding: 40px 32px;
+    }
+    .gap-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 20px;
+    }
+    .gap-icon.teal { background: rgba(13,148,136,0.15); }
+    .gap-icon.amber { background: rgba(245,158,11,0.15); }
+    .gap-icon.blue { background: rgba(59,130,246,0.12); }
+    .gap-card h3 {
+      font-size: 1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 12px;
+    }
+    .gap-card p {
+      font-size: 0.9rem; color: var(--slate-light); line-height: 1.65;
+    }
+
+    /* ── SERVICES ── */
+    .service-block {
+      border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .service-header {
+      padding: 32px 36px;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 24px; align-items: start;
+      background: var(--navy-mid);
+    }
+    .service-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; color: var(--teal);
+      letter-spacing: 0.1em; padding-top: 4px;
+    }
+    .service-header h3 {
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .service-header p {
+      font-size: 0.9rem; color: var(--slate-light); line-height: 1.65;
+    }
+    .service-steps {
+      padding: 24px 36px 24px calc(36px + 24px + 24px);
+      border-top: 1px solid var(--border);
+      background: rgba(15,27,45,0.5);
+    }
+    .service-steps ol {
+      list-style: none; counter-reset: steps;
+    }
+    .service-steps li {
+      counter-increment: steps;
+      display: flex; gap: 14px;
+      font-size: 0.875rem; color: var(--slate-light);
+      line-height: 1.6; margin-bottom: 10px;
+    }
+    .service-steps li::before {
+      content: counter(steps);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; color: var(--teal);
+      background: rgba(13,148,136,0.1);
+      border-radius: 4px; padding: 2px 6px;
+      min-width: 24px; text-align: center;
+      margin-top: 2px; flex-shrink: 0;
+    }
+    .service-note {
+      font-size: 0.82rem; color: var(--slate);
+      font-style: italic; margin-top: 12px;
+      padding-left: 38px;
+    }
+
+    /* ── COURSE (was Credential) ── */
+    .course-section {
+      background: linear-gradient(135deg, #0f1b2d 0%, #1a2e45 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 40px;
+    }
+    .course-inner { max-width: 1100px; margin: 0 auto; }
+
+    .course-meta-strip {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .course-pill {
+      background: rgba(13,148,136,0.12);
+      border: 1px solid rgba(13,148,136,0.25);
+      border-radius: 100px; padding: 5px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--teal-light);
+    }
+
+    /* audience pills */
+    .audience-strip {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px;
+    }
+    .aud-pill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px; padding: 4px 12px;
+      font-size: 0.78rem; color: var(--slate-light);
+    }
+
+    /* phases */
+    .phases-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 48px;
+    }
+    .phase-card {
+      background: var(--navy);
+      padding: 28px 24px;
+    }
+    .phase-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .phase-weeks {
+      font-size: 0.75rem; color: var(--slate);
+      margin-bottom: 10px;
+    }
+    .phase-card h4 {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .phase-card p {
+      font-size: 0.82rem; color: var(--slate-light); line-height: 1.6;
+    }
+
+    /* grading */
+    .grade-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 48px;
+    }
+    .grade-card {
+      background: var(--navy-mid);
+      padding: 28px 24px;
+    }
+    .grade-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.8rem; font-weight: 500;
+      color: var(--teal-light); margin-bottom: 6px;
+    }
+    .grade-card h4 {
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .grade-card p {
+      font-size: 0.8rem; color: var(--slate-light); line-height: 1.55;
+    }
+
+    /* credential tiers */
+    .cred-tiers {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-bottom: 48px;
+    }
+    .cred-tier {
+      border-radius: 12px; padding: 32px;
+      border: 1px solid var(--border);
+    }
+    .cred-tier.verified {
+      background: rgba(13,148,136,0.06);
+      border-color: rgba(13,148,136,0.2);
+    }
+    .cred-tier.distinguished {
+      background: rgba(245,158,11,0.06);
+      border-color: rgba(245,158,11,0.2);
+    }
+    .cred-badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      padding: 4px 12px; border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .cred-tier.verified .cred-badge {
+      background: rgba(13,148,136,0.15); color: var(--teal-light);
+    }
+    .cred-tier.distinguished .cred-badge {
+      background: rgba(245,158,11,0.15); color: var(--amber-light);
+    }
+    .cred-tier h4 {
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .cred-tier p {
+      font-size: 0.875rem; color: var(--slate-light); line-height: 1.65;
+    }
+
+    /* HJM callout */
+    .hjm-box {
+      background: rgba(13,148,136,0.07);
+      border: 1px solid rgba(13,148,136,0.2);
+      border-radius: 12px; padding: 32px 36px;
+      margin-bottom: 48px;
+    }
+    .hjm-box h4 {
+      font-size: 1rem; font-weight: 600;
+      color: var(--teal-light); margin-bottom: 10px;
+    }
+    .hjm-box p {
+      font-size: 0.9rem; color: var(--slate-light); line-height: 1.7;
+    }
+
+    /* professionalism accordion */
+    .prof-heading {
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .prof-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin-bottom: 0;
+    }
+    .prof-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px;
+    }
+    .prof-code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; color: var(--teal);
+      letter-spacing: 0.1em; margin-bottom: 6px;
+    }
+    .prof-card h5 {
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0;
+    }
+
+    /* ── MARKET ── */
+    .market-stats {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 2px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 48px;
+    }
+    .market-stat {
+      background: var(--navy-mid);
+      padding: 32px 24px;
+    }
+    .market-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--teal-light); line-height: 1;
+      margin-bottom: 10px;
+    }
+    .market-stat p {
+      font-size: 0.8rem; color: var(--slate-light); line-height: 1.55;
+    }
+
+    .funnel {
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden;
+    }
+    .funnel-row {
+      display: flex; align-items: center;
+      padding: 18px 28px; gap: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .funnel-row:last-child { border-bottom: none; }
+    .funnel-n {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem; color: var(--teal-light);
+      min-width: 80px;
+    }
+    .funnel-label {
+      font-size: 0.88rem; color: var(--slate-light);
+    }
+
+    /* ── TEAM ── */
+    .team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .team-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+    }
+    .team-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 12px;
+    }
+    .team-card h3 {
+      font-size: 1rem; font-weight: 600;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .team-card p {
+      font-size: 0.85rem; color: var(--slate-light); line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      padding: 80px 40px;
+    }
+    .contact-inner { max-width: 1100px; margin: 0 auto; }
+    .contact-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 48px;
+    }
+    .contact-card {
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px;
+      background: rgba(255,255,255,0.02);
+    }
+    .contact-card p {
+      font-size: 0.85rem; color: var(--slate-light);
+      margin-bottom: 20px;
+    }
+    .contact-card a {
+      display: inline-block;
+      background: var(--teal); color: var(--white);
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .contact-card a:hover { background: var(--teal-light); }
+
+    /* ── REFS ── */
+    .refs {
+      padding: 40px; max-width: 1100px; margin: 0 auto;
+    }
+    .refs h4 {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 16px;
+    }
+    .refs ol {
+      list-style-position: inside;
+    }
+    .refs li {
+      font-size: 0.78rem; color: var(--slate);
+      line-height: 1.7; margin-bottom: 6px;
+    }
+    .refs a { color: var(--slate); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; color: var(--white);
+    }
+    .footer-logo span { color: var(--teal-light); }
+    footer nav { display: flex; gap: 24px; }
+    footer nav a {
+      font-size: 0.8rem; color: var(--slate);
+      text-decoration: none; transition: color 0.2s;
+    }
+    footer nav a:hover { color: var(--white); }
+    .footer-copy {
+      font-size: 0.75rem; color: var(--slate);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero, section, .course-section, .contact-section { padding: 60px 20px; }
+      .gap-grid, .phases-grid, .grade-grid, .market-stats,
+      .team-grid, .contact-cards { grid-template-columns: 1fr; }
+      .cred-tiers { grid-template-columns: 1fr; }
+      .prof-grid { grid-template-columns: 1fr 1fr; }
+      .funnel-row { flex-direction: column; gap: 4px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      footer nav { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Capstone<span>.AI</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#projects">Services</a></li>
+    <li><a href="#course">The Course</a></li>
+    <li><a href="#market">Market</a></li>
+    <li><a href="#contact">Get Involved</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Bay Area Non-Profit Pilot · 2026</div>
+  <h1>Non-Profits Need AI.<br>Students Need Experience<br>That Gets Them Hired.<br><em>We Connect Them.</em></h1>
+  <p>Capstone.AI pairs student teams with non-profits for real, semester-long AI engagements — supervised by experts, supported by technology partners, and held to outcomes both sides can measure and show.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <label>Engagement</label>
+      <span>One Semester</span>
+    </div>
+    <div class="hero-stat">
+      <label>Model</label>
+      <span>Real Clients</span>
+    </div>
+    <div class="hero-stat">
+      <label>Output</label>
+      <span>Documented Results</span>
+    </div>
+  </div>
+  <div class="hero-actions">
+    <a href="#how" class="btn-primary">See How It Works</a>
+    <a href="#contact" class="btn-outline">Join the Pilot →</a>
+  </div>
+</div>
+
+<hr class="full-divider" />
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-label">The Problem</div>
+  <h2 class="section-title">One solution. <em>Three beneficiaries.</em></h2>
+  <div class="section-rule"></div>
+  <p class="section-intro">Non-profits need AI capacity they can't afford. Students need real-world experience employers will recognize. And employers need to hire people who've actually worked with AI — not just studied it. These three gaps point at the same solution.</p>
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="gap-icon teal">🏢</div>
+      <h3>For Non-Profits</h3>
+      <p>Mission-driven organizations face the same operational pressures as any business — outreach, communications, data — without the budget for consultants or a full-time AI hire. Most can't access AI capacity at any price that makes sense.</p>
+    </div>
+    <div class="gap-card">
+      <div class="gap-icon amber">🎓</div>
+      <h3>For Talent</h3>
+      <p>Employers aren't struggling to find people who can run an AI tool. They're struggling to find people who can communicate findings to a client, make a judgment call when the model is wrong, and know when to keep a human in the loop. Those skills only come from real work.</p>
+    </div>
+    <div class="gap-card">
+      <div class="gap-icon blue">🏆</div>
+      <h3>For Employers</h3>
+      <p>Hiring managers want candidates who've worked with real clients, made real decisions under uncertainty, and understand when AI helps and when a human needs to stay in the loop. That combination is rare — and nearly impossible to verify without auditable evidence.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- SERVICES -->
+<section id="projects">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">Three services. <em>Real outcomes.</em></h2>
+  <div class="section-rule"></div>
+  <p class="section-intro">Each service is built around a defined scope, a standard toolset, and a measurable outcome benchmark. You see exactly what you're getting before you sign up.</p>
+
+  <div class="service-block">
+    <div class="service-header">
+      <div class="service-num">Service 01</div>
+      <div>
+        <h3>Outreach &amp; Community Engagement</h3>
+        <p>Reaching new audiences is the most common challenge non-profits report. A two-person team learns your mission, builds an AI-assisted content and outreach system tuned to your voice, and hands off everything so it keeps running after the semester ends. An expert reviews all deliverables before handoff.</p>
+      </div>
+    </div>
+    <div class="service-steps">
+      <ol>
+        <li>We learn your mission, your audience, and what's worked before</li>
+        <li>We build and deploy a content and outreach system using standard AI tools</li>
+        <li>We hand off everything — templates, prompts, workflows — so you can run it yourself</li>
+      </ol>
+      <p class="service-note">Throughout the engagement, students practice client communication and stakeholder management — not just at delivery, but at every check-in along the way.</p>
+    </div>
+  </div>
+
+  <div class="service-block">
+    <div class="service-header">
+      <div class="service-num">Service 02</div>
+      <div>
+        <h3>Data Analysis &amp; Impact Reporting</h3>
+        <p>Most non-profits collect more data than they use. A two-person team audits what you already have, identifies the 2–3 questions it should be answering, and builds a clean dashboard you can use for internal decisions and external reporting. An expert validates the analysis before delivery.</p>
+      </div>
+    </div>
+    <div class="service-steps">
+      <ol>
+        <li>We identify the 2–3 questions your data should be answering but isn't</li>
+        <li>We build a clean analysis using standard tools (Google Looker Studio, Sheets, or equivalent)</li>
+        <li>We document how to read it and update it — so it stays useful after delivery</li>
+      </ol>
+      <p class="service-note">Translating data findings for a non-technical client is a core part of the project. Students learn to present, defend, and adjust their analysis in real conversations — not just hand off a dashboard.</p>
+    </div>
+  </div>
+
+  <div class="service-block">
+    <div class="service-header">
+      <div class="service-num">Service 03</div>
+      <div>
+        <h3>Content &amp; Communications at Scale</h3>
+        <p>Most non-profits don't have the time or budget to produce content consistently. A two-person team extracts your voice, builds a content system around it, and hands off templates, prompts, and workflows so you can produce without starting from scratch every time.</p>
+      </div>
+    </div>
+    <div class="service-steps">
+      <ol>
+        <li>We extract your voice, tone, and what makes your organization distinct</li>
+        <li>We build a content system — templates, formats, and an AI workflow tailored to your channels</li>
+        <li>We deliver a complete handoff kit so content production doesn't stop when we do</li>
+      </ol>
+      <p class="service-note">Students learn to represent an organization's voice responsibly — including knowing when to override AI-generated copy and when the human judgment call matters most.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- THE COURSE (was: The Credential) -->
+<div class="course-section" id="course">
+  <div class="course-inner">
+    <div class="section-label">The Course</div>
+    <h2 class="section-title">CPST 401: Applied AI Capstone<br><em>for Humanities Students</em></h2>
+    <div class="section-rule"></div>
+
+    <div class="course-meta-strip">
+      <span class="course-pill">3 Credits</span>
+      <span class="course-pill">10-Week Quarter</span>
+      <span class="course-pill">Seminar + Client Project Lab</span>
+      <span class="course-pill">Teams of 3–4</span>
+      <span class="course-pill">Delivered by University + Capstone.AI</span>
+    </div>
+
+    <p class="section-intro">Employers increasingly need people who can think critically about AI, communicate what it can and can't do, and bridge technology teams and the humans they serve. This course gives humanities students a structured way to prove exactly that — by deploying a real AI solution for a real non-profit client and leaving with a credential any employer can verify.</p>
+
+    <div class="section-label" style="margin-bottom:12px;">Designed for</div>
+    <div class="audience-strip" style="margin-bottom:40px;">
+      <span class="aud-pill">English &amp; Writing</span>
+      <span class="aud-pill">History</span>
+      <span class="aud-pill">Philosophy</span>
+      <span class="aud-pill">Sociology</span>
+      <span class="aud-pill">Psychology</span>
+      <span class="aud-pill">Political Science</span>
+      <span class="aud-pill">Communications</span>
+      <span class="aud-pill">Anthropology</span>
+      <span class="aud-pill">Gender Studies</span>
+      <span class="aud-pill">Comparative Literature</span>
+    </div>
+
+    <!-- PHASES -->
+    <div class="section-label" style="margin-bottom:16px;">Course Structure — 4 Phases</div>
+    <div class="phases-grid" style="margin-bottom:48px;">
+      <div class="phase-card">
+        <div class="phase-tag">Phase 1</div>
+        <div class="phase-weeks">Weeks 1–3</div>
+        <h4>Discovery &amp; Tool Training</h4>
+        <p>Client discovery and no-code AI tool labs run concurrently. Students scope the client problem while learning the tools they'll need to solve it.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 2</div>
+        <div class="phase-weeks">Weeks 4–5</div>
+        <h4>Solution Design</h4>
+        <p>Teams propose, scope, and get sign-off on their approach. Scope negotiation with the client is a graded milestone — not background work.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 3</div>
+        <div class="phase-weeks">Weeks 6–9</div>
+        <h4>Build &amp; Deploy</h4>
+        <p>The core implementation phase. Weekly Loom stand-ups, decision logs, and Human Judgment Moment documentation throughout.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 4</div>
+        <div class="phase-weeks">Week 10</div>
+        <h4>Handoff &amp; Credential</h4>
+        <p>Client delivery, expert panel review, credential issuance, and LinkedIn profile finalization. The portfolio is published within 48 hours of completion.</p>
+      </div>
+    </div>
+
+    <!-- GRADING -->
+    <div class="section-label" style="margin-bottom:16px;">Grading Breakdown</div>
+    <div class="grade-grid" style="margin-bottom:48px;">
+      <div class="grade-card">
+        <div class="grade-pct">30%</div>
+        <h4>Client Deliverables</h4>
+        <p>Scored against the original scope. Metric movement vs. baseline — not client satisfaction.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-pct">20%</div>
+        <h4>Project Milestones</h4>
+        <p>Discovery report, scoping sign-off, mid-point check-in, and final presentation.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-pct">15%</div>
+        <h4>Professionalism</h4>
+        <p>Graded across all 10 weeks — written communication, meeting conduct, ownership, and managing up. Cannot be made up at the end.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-pct">15%</div>
+        <h4>Discovery &amp; Scoping</h4>
+        <p>Quality of client research, problem framing, and scope document. Evaluated before build begins.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-pct">10%</div>
+        <h4>Client Satisfaction</h4>
+        <p>Client-completed rubric at handoff, weighted separately from outcome metrics.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-pct">10%</div>
+        <h4>Tool Labs</h4>
+        <p>Six no-code AI lab completions, sequenced to arrive just before each is needed on the project.</p>
+      </div>
+    </div>
+
+    <!-- HJM -->
+    <div class="hjm-box">
+      <h4>What is a Human Judgment Moment?</h4>
+      <p>Every Capstone project requires students to document at least three moments where they evaluated AI output, made an independent judgment, and can explain their reasoning. These are logged, reviewed by the expert panel, and included in the verified portfolio — evidence of responsible, human-in-the-loop AI use that no transcript or certificate can provide.</p>
+    </div>
+
+    <!-- CREDENTIAL TIERS -->
+    <div class="section-label" style="margin-bottom:16px;">The Credential — Auditable by Any Employer</div>
+    <div class="cred-tiers">
+      <div class="cred-tier verified">
+        <div class="cred-badge">✓ Capstone Verified</div>
+        <h4>Completed project, Pass or above</h4>
+        <p>Baseline and outcome documented. Client reference included. Expert panel score published. Demonstrates real engagement, sound judgment, and responsible AI use. Every metric claim links to evidence.</p>
+      </div>
+      <div class="cred-tier distinguished">
+        <div class="cred-badge">★ Capstone Distinguished</div>
+        <h4>Distinction rating from the expert panel</h4>
+        <p>Strategic quality scored above threshold. Recommended for roles requiring demonstrated AI judgment, client communication, and leadership under uncertainty. Client reference committed for 3 years.</p>
+      </div>
+    </div>
+
+    <!-- PROFESSIONALISM MODULES -->
+    <div class="section-label" style="margin-bottom:12px;">Professionalism Curriculum (P-01 through P-09)</div>
+    <p style="font-size:0.88rem; color:var(--slate-light); margin-bottom:20px;">Nine graded modules woven across all 10 weeks — the skills employers say are hardest to find in new graduates.</p>
+    <div class="prof-grid">
+      <div class="prof-card"><div class="prof-code">P-01</div><h5>Professional Written Communication</h5></div>
+      <div class="prof-card"><div class="prof-code">P-02</div><h5>Meeting Conduct</h5></div>
+      <div class="prof-card"><div class="prof-code">P-03</div><h5>Ownership &amp; Accountability</h5></div>
+      <div class="prof-card"><div class="prof-code">P-04</div><h5>Giving &amp; Receiving Feedback</h5></div>
+      <div class="prof-card"><div class="prof-code">P-05</div><h5>Managing Up</h5></div>
+      <div class="prof-card"><div class="prof-code">P-06</div><h5>Disagreeing Professionally</h5></div>
+      <div class="prof-card"><div class="prof-code">P-07</div><h5>Representing Yourself</h5></div>
+      <div class="prof-card"><div class="prof-code">P-08</div><h5>Team Dynamics &amp; Conflict</h5></div>
+      <div class="prof-card"><div class="prof-code">P-09</div><h5>Digital Presence</h5></div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider" />
+
+<!-- MARKET -->
+<section id="market">
+  <div class="section-label">The Market</div>
+  <h2 class="section-title">A real market. <em>Underserved by every existing credential.</em></h2>
+  <div class="section-rule"></div>
+  <p class="section-intro">The US has 1.5 million public charities. The Bay Area is home to thousands of mission-driven organizations that need AI capacity and can't access it. We're starting with the ones that are qualified, AI-ready, and have a problem worth solving.</p>
+
+  <div class="market-stats">
+    <div class="market-stat">
+      <div class="market-num">1.5M</div>
+      <p>Public charities in the United States (501(c)(3))</p>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">~10K</div>
+      <p>Non-profits operating in the Bay Area</p>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">400–600</div>
+      <p>Qualified Capstone clients in the pilot market after the full filter</p>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">3–6K</div>
+      <p>New AI implementation roles opening annually at US organizations</p>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">~1.45M</div>
+      <p>Community college credentials awarded annually — most graduates have no applied AI project on record (AACC, 2022–23)</p>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-bottom:16px;">From total market to qualified pilot clients</div>
+  <div class="funnel">
+    <div class="funnel-row">
+      <div class="funnel-n">1.5M</div>
+      <div class="funnel-label">US public charities</div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-n">~10K</div>
+      <div class="funnel-label">Bay Area non-profits</div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-n">~2K</div>
+      <div class="funnel-label">AI-ready with measurable problem</div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-n">~800</div>
+      <div class="funnel-label">Pass full Capstone qualification filter</div>
+    </div>
+    <div class="funnel-row" style="background:rgba(13,148,136,0.06);">
+      <div class="funnel-n" style="color:var(--teal-light);">400–600</div>
+      <div class="funnel-label" style="color:var(--white); font-weight:600;">Pilot-ready for 2026</div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- TEAM -->
+<section>
+  <div class="section-label">What We're Building</div>
+  <h2 class="section-title">The team Capstone.AI <em>needs to work.</em></h2>
+  <div class="section-rule"></div>
+  <p class="section-intro">Capstone doesn't operate on good intentions alone. We're building a team of experienced operators, hiring managers, and domain experts who set the standards, review the work, and keep every engagement accountable.</p>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-status">Recruiting Now</div>
+      <h3>Edtech Operator</h3>
+      <p>Built a bootcamp or skills accelerator at scale. Has managed the employer side of placement — not just curriculum. Prevents cohort management from collapsing at 200 students.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-status">Recruiting Now</div>
+      <h3>Hiring Manager Champion</h3>
+      <p>VP or Director at a 50–300 person company who has felt the pain of AI-naive candidates. Reviews portfolio standards each cohort. Makes the credential real to other hiring managers.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-status">Recruiting Now</div>
+      <h3>Non-Profit Network Connector</h3>
+      <p>Deeply embedded in Bay Area non-profit ecosystems — foundation networks, capacity-building organizations, or civic tech communities. Refers qualified clients and validates the intake model.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-status">Recruiting Now</div>
+      <h3>AI Tooling Expert</h3>
+      <p>Practitioner-level knowledge of the current AI tool stack. Defines the standard toolset for each service, advises on cost-effective usage, and keeps it current as the landscape shifts.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-status">Recruiting Now</div>
+      <h3>Workforce Policy Advisor</h3>
+      <p>Connected to WIBs, community colleges, or county workforce development. Unlocks grant funding, institutional referrals, and policy alignment for the pilot.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-status">Recruiting Now</div>
+      <h3>University Partner Lead</h3>
+      <p>Faculty or administrator at a community college or university with an AI, data, or technology program. Co-designs the talent pipeline and validates the credential with academic credibility.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Get Involved</div>
+    <h2 class="section-title">Join the Bay Area pilot.</h2>
+    <div class="section-rule"></div>
+    <p class="section-intro">Three different roles. One shared goal — building the model that proves AI experience can be earned, verified, and trusted.</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <h3 style="font-size:1rem;font-weight:600;color:var(--white);margin-bottom:10px;">Non-Profits</h3>
+        <p>Reach out to participate in the pilot engagement.</p>
+        <a href="mailto:hello@capstone.ai">Tell Us About Your Organization</a>
+      </div>
+      <div class="contact-card">
+        <h3 style="font-size:1rem;font-weight:600;color:var(--white);margin-bottom:10px;">Students &amp; Talent</h3>
+        <p>Apply to join a cohort and build your verified AI credential.</p>
+        <a href="mailto:hello@capstone.ai">Join as Talent</a>
+      </div>
+      <div class="contact-card">
+        <h3 style="font-size:1rem;font-weight:600;color:var(--white);margin-bottom:10px;">Schools &amp; Tech Companies</h3>
+        <p>Partner to deliver CPST 401 or support the program.</p>
+        <a href="mailto:hello@capstone.ai">Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REFS -->
+<div class="refs">
+  <h4>Data References</h4>
+  <ol>
+    <li>[1] National Center for Charitable Statistics. Approximately 1.5 million 501(c)(3) public charities registered in the United States. <a href="https://nccs.urban.org">nccs.urban.org</a></li>
+    <li>[2] U.S. Chamber of Commerce. <em>Empowering Small Business: The Impact of Technology on U.S. Small Business</em> (2025). 96% of small business owners plan to adopt emerging technologies including AI; 58% currently use generative AI. <a href="https://www.uschamber.com">uschamber.com</a></li>
+    <li>[3] Federal Reserve Bank of New York. <em>The Labor Market for Recent College Graduates</em> (Q4 2025). Unemployment rate for recent graduates hit 5.7%; underemployment rate reached 42.5%. <a href="https://www.newyorkfed.org">newyorkfed.org</a></li>
+    <li>[4] Federal Reserve Banks. <em>2025 Report on Employer Firms: 2024 Small Business Credit Survey</em>. Reaching customers cited as top challenge by 57% of firms. <a href="https://www.fedsmallbusiness.org">fedsmallbusiness.org</a></li>
+    <li>[5] SBA Office of Advocacy. <em>Research Spotlight: AI in Business</em> (September 2025). Small business AI usage reached 8.8% in production use. <a href="https://advocacy.sba.gov">advocacy.sba.gov</a></li>
+    <li>[6] American Association of Community Colleges. Community colleges awarded more than 1.45 million credentials in 2022–23, a 21% increase from a decade earlier. <a href="https://www.aacc.nche.edu">aacc.nche.edu</a></li>
+  </ol>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Capstone<span>.AI</span></div>
   <nav>
-    <a class="nav-logo" href="#">Capstone<span>.AI</span></a>
-    <ul class="nav-links">
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#projects">Services</a></li>
-      <li><a href="#credential">Credential</a></li>
-      <li><a href="#market">Market</a></li>
-      <li><a href="#contact" class="nav-cta">Get Involved</a></li>
-    </ul>
+    <a href="#how">How It Works</a>
+    <a href="#projects">Services</a>
+    <a href="#course">The Course</a>
+    <a href="#market">Market</a>
   </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="max-w">
-      <div class="reveal">
-        <div class="hero-badge">BAY AREA NON-PROFIT PILOT · 2026</div>
-        <h1>
-          Non-Profits Need AI.<br>
-          Students Need Experience That Gets Them Hired.<br>
-          <em>We Connect Them.</em>
-        </h1>
-        <p class="hero-sub">
-          Capstone.AI pairs student teams with non-profits for real, semester-long AI engagements — supervised by experts, supported by technology partners, and held to outcomes both sides can measure and show.
-        </p>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="hero-stat-label">Engagement</div>
-            <div class="hero-stat-value">One Semester</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-label">Model</div>
-            <div class="hero-stat-value">Real Clients</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-label">Output</div>
-            <div class="hero-stat-value">Documented Results</div>
-          </div>
-        </div>
-        <div class="hero-actions">
-          <a href="#how" class="btn-primary">See How It Works</a>
-          <a href="#contact" class="btn-ghost">Join the Pilot →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEM -->
-  <section id="problem" class="problem">
-    <div class="max-w">
-      <div class="reveal" style="margin-bottom: 56px;">
-        <div class="section-label">The Problem</div>
-        <h2 class="section-title">One solution. <em>Three beneficiaries.</em></h2>
-        <p class="section-body">
-          Non-profits need AI capacity they can't afford. Students need real-world experience employers will recognize. And employers need to hire people who've actually worked with AI — not just studied it. These three gaps point at the same solution.
-        </p>
-      </div>
-      <div class="reveal problem-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-        <div class="problem-card">
-          <h3>For Non-Profits</h3>
-          <p>Mission-driven organizations face the same operational pressures as any business — outreach, communications, data — without the budget for consultants or a full-time AI hire. Most can't access AI capacity at any price that makes sense.</p>
-        </div>
-        <div class="problem-card">
-          <h3>For Talent</h3>
-          <p>Employers aren't struggling to find people who can run an AI tool. They're struggling to find people who can communicate findings to a client, make a judgment call when the model is wrong, and know when to keep a human in the loop. Those skills can't be taught in a classroom — they only come from real work, with real stakes and a real client on the other end.</p>
-        </div>
-        <div class="problem-card">
-          <h3>For Employers</h3>
-          <p>Hiring managers want candidates who've worked with real clients, made real decisions under uncertainty, and understand when AI helps and when a human needs to stay in the loop. That combination is rare — and nearly impossible to verify in a new graduate without auditable evidence.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="projects" class="projects">
-    <div class="max-w">
-      <div class="reveal">
-        <div class="section-label">What We Do</div>
-        <h2 class="section-title">Three services. <em>Real outcomes.</em></h2>
-        <p class="section-body">Each service is built around a defined scope, a standard toolset, and a measurable outcome benchmark. You see exactly what you're getting before you sign up.</p>
-      </div>
-      <div class="service-cards reveal">
-
-        <div class="service-card">
-          <div class="section-label">Service 01</div>
-          <h3>Outreach &amp; Community Engagement</h3>
-          <p>Reaching new audiences is the most common challenge non-profits report. A two-person team learns your mission, builds an AI-assisted content and outreach system tuned to your voice, and hands off everything so it keeps running after the semester ends. An expert reviews all deliverables before handoff.</p>
-          <div class="service-how">
-            <div class="section-label" style="margin-bottom: 12px;">How it works</div>
-            <ol>
-              <li>We learn your mission, your audience, and what's worked before</li>
-              <li>We build and deploy a content and outreach system using standard AI tools</li>
-              <li>We hand off everything — templates, prompts, workflows — so you can run it yourself</li>
-            </ol>
-            <p class="service-outcome">Throughout the engagement, students practice client communication and stakeholder management — not just at delivery, but at every check-in along the way.</p>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="section-label">Service 02</div>
-          <h3>Data Analysis &amp; Impact Reporting</h3>
-          <p>Most non-profits collect more data than they use. A two-person team audits what you already have, identifies the 2–3 questions it should be answering, and builds a clean dashboard you can use for internal decisions and external reporting. An expert validates the analysis before delivery.</p>
-          <div class="service-how">
-            <div class="section-label" style="margin-bottom: 12px;">How it works</div>
-            <ol>
-              <li>We identify the 2–3 questions your data should be answering but isn't</li>
-              <li>We build a clean analysis using standard tools (Google Looker Studio, Sheets, or equivalent)</li>
-              <li>We document how to read it and update it — so it stays useful after delivery</li>
-            </ol>
-            <p class="service-outcome">Translating data findings for a non-technical client is a core part of the project. Students learn to present, defend, and adjust their analysis in real conversations — not just hand off a dashboard.</p>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="section-label">Service 03</div>
-          <h3>Content &amp; Communications at Scale</h3>
-          <p>Most non-profits don't have the time or budget to produce content consistently. A two-person team extracts your voice, builds a content system around it, and hands off templates, prompts, and workflows so you can produce without starting from scratch every time. An expert reviews for quality before handoff.</p>
-          <div class="service-how">
-            <div class="section-label" style="margin-bottom: 12px;">How it works</div>
-            <ol>
-              <li>We extract your voice, tone, and what makes your organization distinct</li>
-              <li>We build a content system — templates, formats, and an AI workflow tailored to your channels</li>
-              <li>We deliver a complete handoff kit so content production doesn't stop when we do</li>
-            </ol>
-            <p class="service-outcome">Students learn to represent an organization's voice responsibly — including knowing when to override AI-generated copy and when the human judgment call matters most.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CREDENTIAL -->
-  <section id="credential" class="credential">
-    <div class="max-w">
-      <div class="reveal">
-        <div class="section-label">The Credential</div>
-        <h2 class="section-title">A portfolio an employer <em>can actually verify.</em></h2>
-        <p class="section-body">Not a certificate. An auditable record — baseline metrics, outcome data, AI tool logs, Human Judgment Moment documentation, and expert panel scores. Every claim links to evidence of real work with a real client.</p>
-        <div class="credential-hjm">
-          <div class="credential-hjm-label">What is a Human Judgment Moment?</div>
-          <p>Every Capstone project requires students to document at least three moments where they evaluated AI output, made an independent judgment, and can explain their reasoning. These are logged, reviewed by the expert panel, and included in the verified portfolio — evidence of responsible, human-in-the-loop AI use that no transcript or certificate can provide.</p>
-        </div>
-      </div>
-      <div class="credential-grid reveal">
-        <div class="credential-tier">
-          <div class="credential-tier-icon">✓</div>
-          <div class="credential-tier-name">Capstone Verified</div>
-          <p>Completed project with Pass rating. Baseline and outcome documented. Client reference included. Expert panel score published. Demonstrates real engagement, sound judgment, and responsible AI use.</p>
-        </div>
-        <div class="credential-tier">
-          <div class="credential-tier-icon">★</div>
-          <div class="credential-tier-name">Capstone Distinguished</div>
-          <p>Distinction rating from the independent expert panel. Strategic quality scored above threshold. Recommended for roles requiring demonstrated AI judgment, client communication, and leadership under uncertainty.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MARKET -->
-  <section id="market" class="market">
-    <div class="max-w">
-      <div class="reveal">
-        <div class="section-label">The Market</div>
-        <h2 class="section-title">A real market. <em>Underserved by every existing credential.</em></h2>
-        <p class="section-body">The US has 1.5 million public charities. The Bay Area is home to thousands of mission-driven organizations that need AI capacity and can't access it. We're starting with the ones that are qualified, AI-ready, and have a problem worth solving.</p>
-      </div>
-      <div class="market-stats reveal">
-        <div class="market-stat">
-          <div class="market-stat-value">1.5M</div>
-          <div class="market-stat-label">Public charities in the United States (501(c)(3))</div>
-        </div>
-        <div class="market-stat">
-          <div class="market-stat-value">~10K</div>
-          <div class="market-stat-label">Non-profits operating in the Bay Area</div>
-        </div>
-        <div class="market-stat">
-          <div class="market-stat-value">400–600</div>
-          <div class="market-stat-label">Qualified Capstone clients in the pilot market after the full filter</div>
-        </div>
-        <div class="market-stat">
-          <div class="market-stat-value">3–6K</div>
-          <div class="market-stat-label">New AI implementation roles opening annually at US organizations now</div>
-        </div>
-        <div class="market-stat">
-          <div class="market-stat-value">~1.45M</div>
-          <div class="market-stat-label">Community college credentials awarded annually — most graduates have no applied AI project on record <span style="font-size:0.7rem;opacity:0.7;">(AACC, 2022–23)</span></div>
-        </div>
-      </div>
-      <div class="market-funnel reveal">
-        <div class="funnel-title">From total market to qualified pilot clients</div>
-        <div class="funnel-steps">
-          <div class="funnel-step">
-            <div class="funnel-step-value">1.5M</div>
-            <div class="funnel-step-label">US public charities</div>
-          </div>
-          <div class="funnel-step">
-            <div class="funnel-step-value">~10K</div>
-            <div class="funnel-step-label">Bay Area non-profits</div>
-          </div>
-          <div class="funnel-step">
-            <div class="funnel-step-value">~2K</div>
-            <div class="funnel-step-label">AI-ready with measurable problem</div>
-          </div>
-          <div class="funnel-step">
-            <div class="funnel-step-value">~800</div>
-            <div class="funnel-step-label">Pass full Capstone qualification filter</div>
-          </div>
-          <div class="funnel-step">
-            <div class="funnel-step-value">400–600</div>
-            <div class="funnel-step-label">Pilot-ready for 2026</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADVISORS -->
-  <section id="advisors" class="advisors">
-    <div class="max-w">
-      <div class="reveal">
-        <div class="section-label">What We're Building</div>
-        <h2 class="section-title">The team Capstone.AI <em>needs to work.</em></h2>
-        <p class="section-body">Capstone doesn't operate on good intentions alone. We're building a team of experienced operators, hiring managers, and domain experts who set the standards, review the work, and keep every engagement accountable. This is who stands behind every capstone.</p>
-      </div>
-      <div class="advisor-grid reveal">
-        <div class="advisor-card">
-          <div class="advisor-status">Recruiting Now</div>
-          <h3>Edtech Operator</h3>
-          <p>Built a bootcamp or skills accelerator at scale. Has managed the employer side of placement — not just curriculum. Prevents cohort management from collapsing at 200 students.</p>
-        </div>
-        <div class="advisor-card">
-          <div class="advisor-status">Recruiting Now</div>
-          <h3>Hiring Manager Champion</h3>
-          <p>VP or Director at a 50–300 person company who has felt the pain of AI-naive candidates. Reviews portfolio standards each cohort. Makes the credential real to other hiring managers.</p>
-        </div>
-        <div class="advisor-card">
-          <div class="advisor-status">Recruiting Now</div>
-          <h3>Non-Profit Network Connector</h3>
-          <p>Deeply embedded in Bay Area non-profit ecosystems — foundation networks, capacity-building organizations, or civic tech communities. Refers qualified clients and validates the intake model.</p>
-        </div>
-        <div class="advisor-card">
-          <div class="advisor-status">Recruiting Now</div>
-          <h3>AI Tooling Expert</h3>
-          <p>Practitioner-level knowledge of the current AI tool stack. Defines the standard toolset for each service, advises on cost-effective usage, and keeps it current as the landscape shifts.</p>
-        </div>
-        <div class="advisor-card">
-          <div class="advisor-status">Recruiting Now</div>
-          <h3>Workforce Policy Advisor</h3>
-          <p>Connected to WIBs, community colleges, or county workforce development. Unlocks grant funding, institutional referrals, and policy alignment for the pilot.</p>
-        </div>
-        <div class="advisor-card">
-          <div class="advisor-status">Recruiting Now</div>
-          <h3>University Partner Lead</h3>
-          <p>Faculty or administrator at a community college or university with an AI, data, or technology program. Co-designs the talent pipeline and validates the credential with academic credibility.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <div class="max-w">
-      <div class="reveal">
-        <div class="section-label">Get Involved</div>
-        <h2 class="section-title">Join the Bay Area pilot.</h2>
-        <p class="section-body">Three different roles. One shared goal — building the model that proves AI experience can be earned, verified, and trusted.</p>
-        <div class="contact-groups">
-          <div>
-            <div class="contact-group-label">Non-Profits — reach out to participate</div>
-            <div class="contact-actions">
-              <a href="mailto:hello@capstone.ai" class="btn-contact btn-contact-primary">Tell Us About Your Organization</a>
-            </div>
-          </div>
-          <div>
-            <div class="contact-group-label">Students &amp; Talent — apply to join a cohort</div>
-            <div class="contact-actions">
-              <a href="mailto:hello@capstone.ai" class="btn-contact">Join as Talent</a>
-            </div>
-          </div>
-          <div>
-            <div class="contact-group-label">Schools &amp; Tech Companies — let's partner</div>
-            <div class="contact-actions">
-              <a href="mailto:hello@capstone.ai" class="btn-contact">Partner With Us</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REFERENCES -->
-  <section class="references">
-    <div class="max-w">
-      <div class="references-inner">
-        <strong>Data References</strong>
-        <div class="ref-item">[1] National Center for Charitable Statistics. Approximately 1.5 million 501(c)(3) public charities registered in the United States. <a href="https://nccs.urban.org" target="_blank">nccs.urban.org</a></div>
-        <div class="ref-item">[2] U.S. Chamber of Commerce. <em>Empowering Small Business: The Impact of Technology on U.S. Small Business</em> (2025). 96% of small business owners plan to adopt emerging technologies including AI; 58% currently use generative AI, up from 40% in 2024. <a href="https://www.uschamber.com/technology/empowering-small-business-the-impact-of-technology-on-u-s-small-business" target="_blank">uschamber.com</a></div>
-        <div class="ref-item">[3] Federal Reserve Bank of New York. <em>The Labor Market for Recent College Graduates</em> (Q4 2025). Unemployment rate for recent graduates hit 5.7%; underemployment rate reached 42.5%. <a href="https://www.newyorkfed.org/research/college-labor-market" target="_blank">newyorkfed.org</a></div>
-        <div class="ref-item">[4] Federal Reserve Banks. <em>2025 Report on Employer Firms: 2024 Small Business Credit Survey</em>. Reaching customers cited as top challenge by 57% of firms. <a href="https://www.fedsmallbusiness.org/reports/survey/2025/2025-report-on-employer-firms" target="_blank">fedsmallbusiness.org</a></div>
-        <div class="ref-item">[5] SBA Office of Advocacy. <em>Research Spotlight: AI in Business — Small Firms Closing In</em> (September 2025). Small business AI usage reached 8.8% in production use; large-small adoption gap narrowed from 1.8× to 1.2× since 2024. <a href="https://advocacy.sba.gov/wp-content/uploads/2025/09/Research-Spotlight-AI-in-Business-Small-Firms-Closing-In_-092425.pdf" target="_blank">advocacy.sba.gov</a></div>
-        <div class="ref-item">[6] American Association of Community Colleges. Community colleges awarded more than 1.45 million credentials in the 2022–23 academic year, a 21% increase from a decade earlier. <a href="https://www.aacc.nche.edu" target="_blank">aacc.nche.edu</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">Capstone<span>.AI</span></div>
-    <ul class="footer-links">
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#projects">Services</a></li>
-      <li><a href="#credential">Credential</a></li>
-      <li><a href="#market">Market</a></li>
-    </ul>
-    <div class="footer-copy">© 2026 Capstone.AI · Bay Area Pilot</div>
-  </footer>
-
-  <script>
-    function switchTab(name) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-      document.getElementById('tab-' + name).classList.add('active');
-      event.target.classList.add('active');
-    }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll(':not(.hero) .reveal').forEach(el => observer.observe(el));
-    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
-  </script>
+  <div class="footer-copy">© 2026 Capstone.AI · Bay Area Pilot</div>
+</footer>
 
 </body>
 </html>
